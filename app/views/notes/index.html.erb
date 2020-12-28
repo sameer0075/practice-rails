@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Published Notes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <% if current_user %>
+      <th>Status</th>
+      <% end %>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notes.each do |note| %>
+      <tr>
+        <td><%= note.title %></td>
+        <td><%= note.body %></td>
+        <% if current_user %>
+        <td><%= link_to note.status, toggle_status_note_path(note) %></td>
+        <% end %>
+        <td><%= link_to 'Show', note %></td>
+        <% if current_user %>
+        <td><%= link_to 'Edit', edit_note_path(note) %></td>
+        <% end %>
+        <% if current_user %>
+        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if current_user %>
+<%= link_to 'Check Private Notes', draft_path %><br>
+<%= link_to 'New Note', new_note_path %>
+<% end %>
