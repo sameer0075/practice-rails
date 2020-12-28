@@ -5,6 +5,7 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @notes = Note.published
+    #@notes = current_user.notes.published
   end
 
   def toggle_status
@@ -19,6 +20,7 @@ class NotesController < ApplicationController
   def draft
     if current_user
       @notes = Note.draft
+      #@notes = current_user.notes.draft
     else
       redirect_to notes_url
     end
@@ -49,6 +51,7 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
+    @note.user = current_user
     respond_to do |format|
       if current_user
         if @note.save

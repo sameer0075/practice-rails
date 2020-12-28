@@ -4,4 +4,6 @@ class Note < ApplicationRecord
 
 	scope :draft,->{where(status:'draft')}
 	scope :published,->{where(status:'published')}
+
+	belongs_to :user
 end

@@ -17,6 +17,7 @@
       <tr>
         <td><%= note.title %></td>
         <td><%= note.body %></td>
+        <td><%= note.user.try(:email) %></td>
         <td><%= link_to note.status, toggle_status_note_path(note) %></td>
         <td><%= link_to 'Show', note %></td>
         <td><%= link_to 'Edit', edit_note_path(note) %></td>
